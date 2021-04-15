@@ -4,6 +4,9 @@ use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::net::{IpAddr, Ipv4Addr};
 use std::str::SplitWhitespace;
+use std::time::SystemTime;
+
+use chrono::{DateTime, FixedOffset, TimeZone};
 
 pub fn parse(input: &str) -> Vec<BotData> {
     let file = match File::open(input) {
@@ -20,6 +23,7 @@ pub fn parse(input: &str) -> Vec<BotData> {
         let mut found: BotData = BotData{
             name: String::new(),
             ip: IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)),
+            date: FixedOffset::east(0).ymd(1970, 1, 1).and_hms(0, 0, 0),
             uri: String::new(),
             user_agent: String::new(),
             triggered_on: Trigger::Unassigned
@@ -36,7 +40,18 @@ pub fn parse(input: &str) -> Vec<BotData> {
             found.ip = IpAddr::V4(ip_addr.parse().unwrap());
         }
 
-        let mut uri_split = split_line.skip(5);
+        let mut date_split = split_line.skip(2);
+        let log_date = format!("{} {}", date_split.next().unwrap(), date_split.next().unwrap());
+        found.date = match DateTime::parse_from_str(log_date.as_str(), "[%d/%b/%Y:%T %#z]") {
+            Ok(o) => o,
+            Err(e) => {
+                eprintln!("Failed to parse log date-time: {}, {}", log_date, e);
+                std::process::exit(1);
+            }
+        };
+
+        let mut uri_split = date_split.skip(1);
+
         let uri = uri_split.next().unwrap().to_string();
         found.uri = uri.clone();
         match crate::regexes::bot_uris(uri) {

@@ -24,7 +24,7 @@ fn main() {
         )
         .arg(
             Arg::with_name("output_format")
-                .help("Select the output format.")
+                .help("Select the output format: csv, abuseipdb-csv")
                 .short("-f")
                 .long("--output_format")
                 .takes_value(true)

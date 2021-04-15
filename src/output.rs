@@ -3,9 +3,7 @@ use crate::types::*;
 use std::fs::File;
 use std::io::prelude::*;
 use std::io::LineWriter;
-use std::time::SystemTime;
 
-use chrono::{DateTime, Utc};
 use csv::WriterBuilder;
 
 pub fn csv(output_file: &str, founds: Vec<BotData>) {
@@ -17,7 +15,7 @@ pub fn csv(output_file: &str, founds: Vec<BotData>) {
         }
     };
     let mut writer = LineWriter::new(file);
-    writer.write_all(b"name,ip,user_agent,triggered_on\n").unwrap();
+    writer.write_all(b"name,ip,date,user_agent,triggered_on\n").unwrap();
     for found in founds {
         let trigger: &str = match found.triggered_on {
             Trigger::UriPath => "uri_path",
@@ -28,6 +26,7 @@ pub fn csv(output_file: &str, founds: Vec<BotData>) {
         csv_writer.write_record(&[
             found.name.as_str(),
             found.ip.to_string().as_str(),
+            found.date.to_rfc3339().as_str(),
             found.user_agent.as_str(),
             trigger
         ]).unwrap();
@@ -37,9 +36,6 @@ pub fn csv(output_file: &str, founds: Vec<BotData>) {
 }
 
 pub fn abuseipdb_csv(output_file: &str, founds: Vec<BotData>) {
-    let now = SystemTime::now();
-    let now: DateTime<Utc> = now.into();
-    let now = now.to_rfc3339();
     let file = match File::create(output_file) {
         Ok(o) => o,
         Err(e) => {
@@ -61,7 +57,7 @@ pub fn abuseipdb_csv(output_file: &str, founds: Vec<BotData>) {
         csv_writer.write_record(&[
             found.ip.to_string().as_str(),
             "19",
-            now.as_str(),
+            found.date.to_rfc3339().as_str(),
             match found.triggered_on {
                 Trigger::UriPath => format!("\"{} - {}: {}\"", found.name, trigger, found.uri),
                 Trigger::UserAgent => format!("\"{} - {}: {}\"", found.name, trigger, found.user_agent),
