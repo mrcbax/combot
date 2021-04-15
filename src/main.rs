@@ -57,8 +57,8 @@ fn main() {
             "csv" => {
                 output::csv(matches.value_of("output").unwrap(), founds);
             },
-            "json" => todo!(),
-            _ => todo!()
+            "json" => eprintln!("JSON output not yet implemented."),
+            _ => eprintln!("Specified output format does not exist.")
         }
     }
 }
