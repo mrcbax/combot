@@ -1,5 +1,4 @@
-use crate::types::Trigger;
-use crate::BotData;
+use crate::types::*;
 
 use std::fs::File;
 use std::io::{BufRead, BufReader};
