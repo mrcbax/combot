@@ -2,16 +2,13 @@ extern crate clap;
 extern crate csv;
 extern crate regex;
 
-use std::fs::{self, File};
-use std::io::prelude::*;
-use std::io::LineWriter;
-use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
+use std::net::IpAddr;
 
 use clap::{crate_version, crate_name, crate_description, App, Arg};
-use csv::WriterBuilder;
 
 pub mod nginx_parser;
 pub mod regexes;
+pub mod output;
 
 pub enum Trigger {
     UriPath,
@@ -71,31 +68,11 @@ fn main() {
     };
     if founds.len() > 0 {
         match matches.value_of("output_format").unwrap() {
+            "abuseipdb-csv" => {
+                output::abuseipdb_csv(matches.value_of("output").unwrap(), founds);
+            },
             "csv" => {
-                let file = match File::create(matches.value_of("output").unwrap()) {
-                    Ok(o) => o,
-                    Err(e) => {
-                        eprintln!("Failed to create output file: {}", e);
-                        std::process::exit(1);
-                    }
-                };
-                let mut writer = LineWriter::new(file);
-                writer.write_all(b"name,ip,user_agent,triggered_on\n").unwrap();
-                for found in founds {
-                    let trigger: &str = match found.triggered_on {
-                        Trigger::UriPath => "uri_path",
-                        Trigger::UserAgent => "user_agent",
-                        Trigger::Unassigned => "none"
-                    };
-                    let mut csv_writer = WriterBuilder::new().from_writer(vec![]);
-                    csv_writer.write_record(&[
-                        found.name.as_str(),
-                        found.ip.to_string().as_str(),
-                        found.user_agent.as_str(), trigger
-                    ]).unwrap();
-                    writer.write_all(csv_writer.into_inner().unwrap().as_slice()).unwrap();
-                }
-                writer.flush().unwrap();
+                output::csv(matches.value_of("output").unwrap(), founds);
             },
             "json" => todo!(),
             _ => todo!()

@@ -3,7 +3,7 @@ use crate::BotData;
 
 use std::fs::File;
 use std::io::{BufRead, BufReader};
-use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
+use std::net::{IpAddr, Ipv4Addr};
 use std::str::SplitWhitespace;
 
 pub fn parse_log(input: &str) -> Vec<BotData> {
@@ -38,8 +38,9 @@ pub fn parse_log(input: &str) -> Vec<BotData> {
         }
 
         let mut uri_split = split_line.skip(5);
-
-        match crate::regexes::bot_uris(uri_split.next().unwrap().to_string()) {
+        let uri = uri_split.next().unwrap().to_string();
+        found.uri = uri.clone();
+        match crate::regexes::bot_uris(uri) {
             Some(s) => {
                 found.triggered_on = Trigger::UriPath;
                 found.name = s.to_string();
