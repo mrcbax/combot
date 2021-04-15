@@ -6,7 +6,7 @@ use std::net::IpAddr;
 
 use clap::{crate_version, crate_name, crate_description, App, Arg};
 
-pub mod nginx_parser;
+pub mod parsers;
 pub mod regexes;
 pub mod output;
 
@@ -61,7 +61,7 @@ fn main() {
         )
         .get_matches();
     let founds: Vec<BotData> = match matches.value_of("input_format").unwrap() {
-        "nginx" => nginx_parser::parse_log(
+        "nginx" => parsers::nginx::parse(
             matches.value_of("input").unwrap(),
         ),
         _ => todo!()

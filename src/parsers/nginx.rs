@@ -6,7 +6,7 @@ use std::io::{BufRead, BufReader};
 use std::net::{IpAddr, Ipv4Addr};
 use std::str::SplitWhitespace;
 
-pub fn parse_log(input: &str) -> Vec<BotData> {
+pub fn parse(input: &str) -> Vec<BotData> {
     let file = match File::open(input) {
         Ok(o) => o,
         Err(e) => {
