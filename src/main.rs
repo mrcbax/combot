@@ -1,28 +1,11 @@
-extern crate clap;
-extern crate csv;
-extern crate regex;
-
-use std::net::IpAddr;
-
 use clap::{crate_version, crate_name, crate_description, App, Arg};
 
 pub mod parsers;
 pub mod regexes;
 pub mod output;
+pub mod types;
 
-pub enum Trigger {
-    UriPath,
-    UserAgent,
-    Unassigned
-}
-
-pub struct BotData {
-    pub name: String,
-    pub ip: IpAddr,
-    pub uri: String,
-    pub user_agent: String,
-    pub triggered_on: Trigger
-}
+use types::*;
 
 fn main() {
     let matches = App::new(crate_name!())

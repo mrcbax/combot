@@ -1,5 +1,4 @@
-use crate::BotData;
-use crate::Trigger;
+use crate::types::*;
 
 use std::fs::File;
 use std::io::prelude::*;
