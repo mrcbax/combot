@@ -10,11 +10,10 @@ use types::*;
 fn main() {
     let matches = App::new(crate_name!())
         .about(crate_description!())
-    // use crate_version! to pull the version number
         .version(crate_version!())
         .arg(
             Arg::with_name("input_format")
-                .help("Select the output format.")
+                .help("Select the output format: nginx")
                 .short("-i")
                 .long("--input_format")
                 .takes_value(true)
@@ -33,6 +32,24 @@ fn main() {
                 .requires("output")
         )
         .arg(
+            Arg::with_name("uri_list")
+                .help("Specify a path to a list of URI pieces to trigger on.")
+                .short("-u")
+                .long("--uri_list")
+                .takes_value(true)
+                .multiple(false)
+                .required(false)
+        )
+        .arg(
+            Arg::with_name("ua_list")
+                .help("Specify a path to a list of User Agent pieces to trigger on.")
+                .short("-a")
+                .long("--ua_list")
+                .takes_value(true)
+                .multiple(false)
+                .required(false)
+        )
+        .arg(
             Arg::with_name("input")
                 .help("the input file to use.")
                 .required(true),
@@ -43,12 +60,25 @@ fn main() {
                 .required(true),
         )
         .get_matches();
+
+    let mut uri_path = "";
+    let mut ua_path = "";
+    if matches.is_present("uri_list") {
+        uri_path = matches.value_of("uri_list").unwrap();
+    }
+    if matches.is_present("ua_list") {
+        ua_path = matches.value_of("ua_list").unwrap();
+    }
+
     let founds: Vec<BotData> = match matches.value_of("input_format").unwrap() {
         "nginx" => parsers::nginx::parse(
             matches.value_of("input").unwrap(),
+            uri_path,
+            ua_path
         ),
         _ => todo!()
     };
+
     if founds.len() > 0 {
         match matches.value_of("output_format").unwrap() {
             "abuseipdb-csv" => {

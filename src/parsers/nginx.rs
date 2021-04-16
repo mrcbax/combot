@@ -4,11 +4,10 @@ use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::net::{IpAddr, Ipv4Addr};
 use std::str::SplitWhitespace;
-use std::time::SystemTime;
 
 use chrono::{DateTime, FixedOffset, TimeZone};
 
-pub fn parse(input: &str) -> Vec<BotData> {
+pub fn parse(input: &str, uri_path: &str, ua_path: &str) -> Vec<BotData> {
     let file = match File::open(input) {
         Ok(o) => o,
         Err(e) => {
@@ -54,10 +53,10 @@ pub fn parse(input: &str) -> Vec<BotData> {
 
         let uri = uri_split.next().unwrap().to_string();
         found.uri = uri.clone();
-        match crate::regexes::bot_uris(uri) {
+        match crate::regexes::bot_uris(uri, uri_path) {
             Some(s) => {
                 found.triggered_on = Trigger::UriPath;
-                found.name = s.to_string();
+                found.name = s;
             },
             None => ()
         }
@@ -67,10 +66,10 @@ pub fn parse(input: &str) -> Vec<BotData> {
             found.user_agent.push_str(format!("{} ", ua_part).replace("\"", "").trim());
         }
 
-        match crate::regexes::bot_uas(&found.user_agent) {
+        match crate::regexes::bot_uas(&found.user_agent, ua_path) {
             Some(s) => {
                 found.triggered_on = Trigger::UserAgent;
-                found.name = s.to_string();
+                found.name = s;
             },
             None => ()
         }
