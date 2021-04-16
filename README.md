@@ -30,7 +30,7 @@ Two lists are spported, these are URI lists and User Agent lists. Trigger string
 
 For a URI trigger use `phpunit` not `/test/phpunit/submit.php`.
 
-For a User Agent use `zgrab` not `Mozilla/5.0 zgrab/0.x`.
+For a User Agent trigger use `zgrab` not `Mozilla/5.0 zgrab/0.x`.
 
 URIs take precedence over User Agents as they tend to be more specific.
 
@@ -55,6 +55,7 @@ OPTIONS:
     -u, --uri_list <uri_list>              Specify a path to a list of URI pieces to trigger on.
 
 ARGS:
-    <input>     the input file to use.
+    <input>     the input 
+    file to use.
     <output>    the output file to use.
 ```
