@@ -1,4 +1,4 @@
-use clap::{crate_version, crate_name, crate_description, App, Arg};
+use clap::{crate_version, crate_name, crate_description, crate_authors, App, Arg};
 
 pub mod parsers;
 pub mod regexes;
@@ -10,7 +10,8 @@ use types::*;
 fn main() {
     let matches = App::new(crate_name!())
         .about(crate_description!())
-        .version(crate_version!())
+        .author(crate_authors!())
+        .version(format!("{}\n{}", crate_version!(), "GNU-GPL-3.0").as_str())
         .arg(
             Arg::with_name("input_format")
                 .help("Select the output format: nginx")
