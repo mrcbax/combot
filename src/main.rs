@@ -14,7 +14,7 @@ fn main() {
         .version(format!("{}\t{}", crate_version!(), "GNU-GPL-3.0").as_str())
         .arg(
             Arg::with_name("input_format")
-                .help("Select the output format: nginx")
+                .help("Select the input format: nginx")
                 .short("-i")
                 .long("--input_format")
                 .takes_value(true)

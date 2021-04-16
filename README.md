@@ -28,7 +28,7 @@ FLAGS:
     -V, --version    Prints version information
 
 OPTIONS:
-    -i, --input_format <input_format>      Select the output format: nginx
+    -i, --input_format <input_format>      Select the input format: nginx
     -f, --output_format <output_format>    Select the output format: csv, abuseipdb-csv
     -a, --ua_list <ua_list>                Specify a path to a list of User Agent pieces to trigger on.
     -u, --uri_list <uri_list>              Specify a path to a list of URI pieces to trigger on.
