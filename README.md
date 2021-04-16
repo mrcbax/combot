@@ -10,8 +10,27 @@ A command line utility to parse server access logs, detect bots, and output a li
 ## Supported output formats:
 
 - [x] CSV
-- [x] [AbuseIPDB](https://abuseipdb.com) CSV
+- [x] [AbuseIPDB](https://abuseipdb.com) CSV (don't forget to dedpulicate this list before submitting)
 - [ ] JSON
+
+## Trigger lists:
+
+This tool supports specifying "trigger lists" or using the built in lists.
+
+List files should be specified in the following format:
+
+```
+botname1|trigger string one
+botname2|trigger string two
+```
+
+Two lists are spported, these are URI lists and User Agent lists. Trigger strings work best when they are a substring of the respective part of the log entry. For example:
+
+For a URI trigger use `phpunit` not `/test/phpunit/submit.php`.
+
+For a User Agent use `zgrab` not `Mozilla/5.0 zgrab/0.x`.
+
+URIs take precedence over User Agents as they tend to be more specific.
 
 ## Help
 
