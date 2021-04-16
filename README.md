@@ -55,7 +55,6 @@ OPTIONS:
     -u, --uri_list <uri_list>              Specify a path to a list of URI pieces to trigger on.
 
 ARGS:
-    <input>     the input 
-    file to use.
-    <output>    the output file to use.
+    <input>     The input file path.
+    <output>    The output file path (will be overwritten).
 ```
