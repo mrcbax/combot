@@ -52,12 +52,12 @@ fn main() {
         )
         .arg(
             Arg::with_name("input")
-                .help("the input file to use.")
+                .help("The input file path.")
                 .required(true),
         )
         .arg(
             Arg::with_name("output")
-                .help("the output file to use.")
+                .help("The output file path (will be overwritten).")
                 .required(true),
         )
         .get_matches();
