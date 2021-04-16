@@ -26,7 +26,7 @@ botname2|trigger string two
 
 The pipe `|` character is used to separate the trigger name from the trigger string, each line is a trigger.
 
-Two lists are spported, these are URI lists and User Agent lists. Trigger strings work best when they are a substring of the respective part of the log entry. For example:
+Two lists are supported, these are URI lists and User Agent lists. Trigger strings work best when they are a substring of the respective part of the log entry. For example:
 
 For a URI trigger use `phpunit` not `/test/phpunit/submit.php`.
 
