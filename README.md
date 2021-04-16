@@ -2,18 +2,18 @@
 
 A command line utility to parse server access logs, detect bots, and output a list of detected bots in the specified format.
 
-## Supported input formats:
+## Supported Input Formats
 
 - [x] NGINX
 - [ ] Apache
 
-## Supported output formats:
+## Supported Output Formats
 
 - [x] CSV
 - [x] [AbuseIPDB](https://abuseipdb.com) CSV (don't forget to dedpulicate this list before submitting)
 - [ ] JSON
 
-## Trigger lists:
+## Trigger Lists
 
 This tool supports specifying "trigger lists" or using the built in lists.
 
