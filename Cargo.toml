@@ -2,6 +2,7 @@
 name = "combot"
 version = "0.1.0"
 authors = ["Chad Baxter <cbax@doslabelectronics.com>"]
+description = "A utility to parse server access logs and detect bots based on URI paths and User Agents."
 edition = "2018"
 license = "GPL-3.0-or-later"
 
