@@ -11,7 +11,7 @@ fn main() {
     let matches = App::new(crate_name!())
         .about(crate_description!())
         .author(crate_authors!())
-        .version(format!("{}\n{}", crate_version!(), "GNU-GPL-3.0").as_str())
+        .version(format!("{}\t{}", crate_version!(), "GNU-GPL-3.0").as_str())
         .arg(
             Arg::with_name("input_format")
                 .help("Select the output format: nginx")
