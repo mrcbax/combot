@@ -81,6 +81,9 @@ pub fn bot_uas(value: &String, ua_path: &str) -> Option<String> {
         if value.contains("NetSystems") {
             Some("netsystemsresearch".to_string());
         }
+        if value.contains("Test Certificate Info") {
+            Some("windowscpp-certificateprobe".to_string());
+        }
         return None;
     } else {
         let file = match File::open(ua_path) {
@@ -127,6 +130,9 @@ pub fn bot_uris(value: String, uri_path: &str) -> Option<String> {
         }
         if value.contains("dns-query") {
             return Some("exploit-nginx".to_string());
+        }
+        if value.contains("xmlrpc") {
+            return Some("exploit-wordpress".to_string());
         }
         return None;
     } else {
