@@ -91,7 +91,7 @@ pub fn bot_uas(value: &String, ua_path: &str) -> Option<String> {
             return Some("advertisment-fraud".to_string());
         }
         if value.contains("Mojolicious") {
-            return Some("perl-mojolicious");
+            return Some("perl-mojolicious".to_string());
         }
         return None;
     } else {
