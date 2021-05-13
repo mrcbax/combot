@@ -93,8 +93,8 @@ pub fn bot_uas(value: &String, ua_path: &str) -> Option<String> {
         if value.contains("Mojolicious") {
             return Some("perl-mojolicious".to_string());
         }
-        if value.contains("lkxscan") {
-            return Some("secrets-keys".to_string());
+        if value.contains("lkxscan") || value.contains("l9tcpid") {
+            return Some("secrets-leakix".to_string());
         }
         return None;
     } else {
