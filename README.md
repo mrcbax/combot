@@ -17,6 +17,8 @@ A command line utility to parse server access logs, detect bots, and output a li
 
 This tool supports specifying "trigger lists" or using the built in lists.
 
+Do not use the built in lists if you are using WordPress, PHPMyAdmin, or PHPUnit. You will have multiple false positives, instead create your own lists.
+
 List files should be specified in the following format:
 
 ```
