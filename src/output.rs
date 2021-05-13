@@ -45,7 +45,9 @@ pub fn abuseipdb_csv(output_file: &str, founds: Vec<BotData>) {
     };
     let mut writer = LineWriter::new(file);
     writer.write_all(b"IP,Categories,ReportDate,Comment\n").unwrap();
-    for found in founds {
+    for mut found in founds {
+        found.uri = found.uri.replace('"', "");
+        found.user_agent = found.user_agent.replace('"', "");
         let trigger: &str = match found.triggered_on {
             Trigger::UriPath => "uri_path",
             Trigger::UserAgent => "user_agent",

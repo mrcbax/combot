@@ -10,79 +10,88 @@ pub fn bot_uas(value: &String, ua_path: &str) -> Option<String> {
             return Some("python-requests".to_string());
         }
         if value.contains("ZoominfoBot") {
-            Some("ZoomInfo".to_string());
+            return Some("ZoomInfo".to_string());
         }
         if value.contains("GuzzleHttp") {
-            Some("guzzle".to_string());
+            return Some("guzzle".to_string());
         }
         if value.contains("curl") {
-            Some("curl".to_string());
+            return Some("curl".to_string());
         }
         if value.contains("Elisa") {
-            Some("elisabot".to_string());
+            return Some("elisabot".to_string());
         }
         if value.contains("Censys") {
-            Some("censys".to_string());
+            return Some("censys".to_string());
         }
         if value.contains("Dispatch") {
-            Some("java-dispatch".to_string());
+            return Some("java-dispatch".to_string());
         }
         if value.contains("Barkowler") {
-            Some("barkowler".to_string());
+            return Some("barkowler".to_string());
         }
         if value.contains("Semrush") {
-            Some("semrush".to_string());
+            return Some("semrush".to_string());
         }
         if value.contains("LightspeedSystems") {
-            Some("lightspeed".to_string());
+            return Some("lightspeed".to_string());
         }
         if value.contains("Headless") {
-            Some("generic".to_string());
+            return Some("generic".to_string());
         }
         if value.contains("Adsbot") {
-            Some("adsbot".to_string());
+            return Some("adsbot".to_string());
         }
         if value.contains("adstxt") {
-            Some("adstxt".to_string());
+            return Some("advertisment-fraud".to_string());
         }
         if value.contains("Blackboard") {
-            Some("blackboard".to_string());
+            return Some("blackboard".to_string());
         }
         if value.contains("crawler4j") {
-            Some("java-crawler4j".to_string());
+            return Some("java-crawler4j".to_string());
         }
         if value.contains("Apache-HttpClient") {
-            Some("apache".to_string());
+            return Some("apache".to_string());
         }
         if value.contains("Pleroma") {
-            Some("pleroma".to_string());
+            return Some("pleroma".to_string());
         }
         if value.contains("Expanse") {
-            Some("expanseinc".to_string());
+            return Some("expanseinc".to_string());
         }
-        if value.contains("rb") {
-            Some("ruby-http".to_string());
-        }
+        /*if value.contains("rb") {
+            return Some("ruby-http".to_string());
+        }*/
         if value.contains("Synapse") {
-            Some("synapse".to_string());
+            return Some("synapse".to_string());
         }
         if value.contains("MTRobot") {
-            Some("mtrobot".to_string());
+            return Some("mtrobot".to_string());
         }
         if value.contains("DotBot") {
-            Some("dotbot".to_string());
+            return Some("dotbot".to_string());
         }
         if value.contains("Go http package") {
-            Some("go-http".to_string());
+            return Some("go-http".to_string());
         }
         if value.contains("got/9") {
-            Some("got".to_string());
+            return Some("got".to_string());
         }
         if value.contains("NetSystems") {
-            Some("netsystemsresearch".to_string());
+            return Some("netsystemsresearch".to_string());
         }
         if value.contains("Test Certificate Info") {
-            Some("windowscpp-certificateprobe".to_string());
+            return Some("windowscpp-certificateprobe".to_string());
+        }
+        if value.contains("quic-go-HTTP") {
+            return Some("go-http".to_string());
+        }
+        if value.contains("TprAdsTxtCrawler") {
+            return Some("advertisment-fraud".to_string());
+        }
+        if value.contains("Mojolicious") {
+            return Some("perl-mojolicious");
         }
         return None;
     } else {
@@ -133,6 +142,15 @@ pub fn bot_uris(value: String, uri_path: &str) -> Option<String> {
         }
         if value.contains("xmlrpc") {
             return Some("exploit-wordpress".to_string());
+        }
+        if value.contains("humans.txt") {
+            return Some("harvest-pii".to_string());
+        }
+        if value.contains("phpstorm") || value.contains("ThinkPHP") {
+            return Some("exploit-thinkphp".to_string());
+        }
+        if value.contains("mstshash=Administr") {
+            return Some("exploit-msts".to_string());
         }
         return None;
     } else {

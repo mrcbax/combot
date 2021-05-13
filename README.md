@@ -1,4 +1,4 @@
-# ComBot 0.1.0
+# ComBot 0.1.1
 
 A command line utility to parse server access logs, detect bots, and output a list of detected bots in the specified format.
 
