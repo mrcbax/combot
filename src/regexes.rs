@@ -30,9 +30,6 @@ pub fn bot_uas(value: &String, ua_path: &str) -> Option<String> {
         if value.contains("Barkowler") {
             return Some("barkowler".to_string());
         }
-        if value.contains("Semrush") {
-            return Some("semrush".to_string());
-        }
         if value.contains("LightspeedSystems") {
             return Some("lightspeed".to_string());
         }
@@ -69,9 +66,6 @@ pub fn bot_uas(value: &String, ua_path: &str) -> Option<String> {
         if value.contains("MTRobot") {
             return Some("mtrobot".to_string());
         }
-        if value.contains("DotBot") {
-            return Some("dotbot".to_string());
-        }
         if value.contains("Go http package") {
             return Some("go-http".to_string());
         }
@@ -95,6 +89,9 @@ pub fn bot_uas(value: &String, ua_path: &str) -> Option<String> {
         }
         if value.contains("lkxscan") || value.contains("l9tcpid") {
             return Some("secrets-leakix".to_string());
+        }
+        if value.contains("onsiteexplorer") || value.contains("Semrush") {
+            return Some("marketing-mining".to_string());
         }
         return None;
     } else {
@@ -154,6 +151,12 @@ pub fn bot_uris(value: String, uri_path: &str) -> Option<String> {
         }
         if value.contains("mstshash=Administr") {
             return Some("exploit-msts".to_string());
+        }
+        if value.contains(".vscode") || value.contains(".ftpconfig") || value.contains("deployment-config.json") || value.contains("sftp-config.json") || value.contains("ftpsync.settings") {
+            return Some("secrets-vscode".to_string());
+        }
+        if value.contains("microsoft.exchange.ediscovery.exporttool.application") {
+            return Some("exploit-msexchange".to_string());
         }
         return None;
     } else {
