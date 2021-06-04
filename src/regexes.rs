@@ -161,6 +161,9 @@ pub fn bot_uris(value: String, uri_path: &str) -> Option<String> {
         if value.contains("microsoft.exchange.ediscovery.exporttool.application") {
             return Some("exploit-msexchange".to_string());
         }
+        if value.contains("magento") || value.contains("staging") || value.contains("downloader") {
+            return Some("exploit-magento".to_string());
+        }
         return None;
     } else {
         let file = match File::open(uri_path) {
