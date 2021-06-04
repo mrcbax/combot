@@ -96,6 +96,9 @@ pub fn bot_uas(value: &String, ua_path: &str) -> Option<String> {
         if value.contains("MojeekBot") {
             return Some("mojeek".to_string());
         }
+        if value.contains("Netcraft") {
+            return Some("netcraft-drmbot".to_string());
+        }
         return None;
     } else {
         let file = match File::open(ua_path) {
